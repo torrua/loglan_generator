@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="icon"
+      type="image/png"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADJ0lEQVQ4T21TWUwTURQ9701bpmWAAq2tUlCQQhBRjPrhEomoARMVExdI1A+/MIS6JeKX30YSNaL4YeKHGrcS14AmKmpEMCYajUsEWdQWQaoVSwfaaWfmaYcl1vj+7rn3nHffPfcR/Ofs3XvDLMuRVYTQWeNpVWc08hfq6ysG/i0nfwPV1RedvKBvAUOO0Wob5a3JRjDg5/tuPQgDCOlUJLWisbHq4yRvSqCmxl2u59UWoWCUKmICTOlFsCyeB0WKovv8Lczc2YefzywIdgoKZFrW0LClNSaiCdTUuHN1Caxr2mofTSocQeSHAUPN+cipXA/GgJ5z1+HY0Q2doCDwKhX+tnQ1JLK8M2eqejWB3fuufEyaIzqnrRnSOvv1Mg1hTwEyy0u0eOBBOwyON0hZMKzFvns2BDuT3jUcqywidXXXHOGI7M3e9QmUV7SC2C2hvnw41paCECDQ9Rkjng7YN3zW8rLI4cvZbDCZ5ZLa2qtHTJmRAxmVnql5MBXov5AL29ISJDpskENheFsegimjSFs+iMRcEd6Ls1h40HCUuFzuGynzgxutq7/FOeRvs8KgW4G04vxxnDGI/T4MtD5F1o5e+GMDfZvcTFyuppspxYEK66rx92uuRygGmmYitWAJzAUTqzCR+/78FQI9PaC8hIiPbya1tVcOm7KiBzO2eogajRGzIQ1RJM22Y0bpMhCOgskKGGOgep0mMzb4A1/vd0RlMXyI7N9/OVNm1JNd/Qmhfh7B14XIKFsJquO0YskfgKf5EVRZhW1JMaThEQhZ0+G90y5RUPuEje4uwSnmRX8ZYXYuROpc5zh5eASe262wlHrBFA7B91bw0wMYfmEGU+nVkyc2V8UtktGWTrPWl4JQAiUkoa/pLiwrvRDyglPzCbw2w/8kXY2Gaf7p01t7pqzbs+fSPNCE+4mZNsFessg0+LgDBnsv0pb5NLIyxsHfZoHYJahKhFt36tSWuzE87jO5XG4r0XFHoLLtjCn65EIRRK9CGjIyyacjhEM3VZTy48e39U22FCcwCdbV3ZoxNhbZRQgrin1BxtgHk4lrrK/f1B+3LH+C3+k0TOAiD2BKAAAAAElFTkSuQmCC"
+/>
+{% block title %}{% endblock %}
+{% block style %}{% endblock %}
+<script type="text/javascript" charset="utf-8">
+<!--
+	var wordSearch = function() {
+		var request = this.value.toLowerCase();
+		request = request.replace(/^\s+|\s+$/g,''); // ignore leading and trailing whitespace
+		if (request.length == 0) return;
+
+		var elements = document.querySelectorAll('[wid^='+request+']');
+		if (elements.length == 0) return;
+		elements[0].scrollIntoView();
+	};
+	window.onload = function() {document.getElementById("search").onkeyup = wordSearch;}
+-->
+</script>
+</head>
+<body>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#top">LOD</a>
+	<form class="form-inline my-2 my-lg-0">
+		<input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
+ 	</form>
+	{% block menu %}{% endblock %}
+</nav>
+<main id="content">
+<a name="top"></a>
+{% block words %}{% endblock %}
+</main>
+<nav class="navbar fixed-bottom navbar-expand-lg bg-light">
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item">
+			<div class="container-fluent" style="font-size: 10px; margin-right: 10px;">{% block tech %}{% endblock %} Copyright © <script type="text/javascript">var year = new Date();document.write(year.getFullYear());</script> by <a href="https://http://www.loglan.org/">The Loglan Institute</a>. All rights reserved.</div>
+		</li>
+	</ul>
+</nav>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

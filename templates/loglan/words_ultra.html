@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}<title>Loglan to English Dictionary</title>{% endblock %}
+{% block style %}
+<style>
+	body {
+		font-family: 'Merriweather', serif;
+		font-size: 14px;
+		margin-left: 20px;
+	}
+	main {
+		position: absolute;
+		top: 60px;
+		bottom: 20px;
+		overflow-y: scroll;
+	}
+	::-webkit-scrollbar {
+		width: 0px;  /* Remove scrollbar space */
+		background: transparent;  /* Optional: just make scrollbar invisible */
+	}
+	nav.fixed-top {
+		background-color: black;
+		height: 50px;
+		color: white;
+	}
+	nav.fixed-bottom {
+		height: 20px;
+		text-align: right;
+	}
+
+	.lt > span {
+		font-size: 24px;
+		font-weight: bold;
+	}
+	w {
+		margin-top: 20px;
+	}
+	wl {
+		font-weight: bold;
+		display: block;
+	}
+	m, d, w, us {
+		display: block;
+	}
+	ms > *:not(:first-child) {
+		margin-top: 10px;
+	}
+	ms > * {
+		margin-left: 10px;
+	}
+
+	afx {
+		color: #007F00;
+		font-style: italic;
+	}
+	o {
+		color: #007F00;
+		font-style: italic;
+	}
+	d {
+		margin-left: 20px;
+		margin-top: 5px;
+
+		text-align: justify;
+		max-width: 60%;
+		min-width: 400px;
+	}
+	du {
+		font-weight: bold;
+	}
+	us {
+		margin-top: 5px;
+		max-width: 40%;
+		min-width: 400px;
+	}
+	k {
+		color: #0000FF;
+		font-style: italic;
+	}
+	l {
+		color: #C70039;
+		font-weight: bold;
+	}
+</style>
+{% endblock %}
+{% block menu %}
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<ul class="navbar-nav mr-auto">
+		{% for letter in dictionary.keys() %}
+		<li class="nav-item">
+			<a class="nav-link" href="#{{ letter }}">{{ letter }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}
+
+{% block words %}
+{% for letter, words in dictionary.items() %}
+<hr width="400px" align="left">
+<a name="{{ letter }}"></a>
+<div class="lt"><span class="lt">{{ letter }}</span>
+{%- for word in words %}
+<w wid="{{ word.name.lower() }}"><wl>{{ word.name }},</wl>
+<ms>
+	{%- for meaning in word.meanings %}
+	<m>
+		<t>{{ meaning.technical }}</t>
+		<ds>
+		{%- for definition in meaning.definitions %}
+			{{definition}}
+		{%- endfor %}
+		</ds>
+		{%- if meaning.used_in %}
+		<us>Used In: {{ meaning.used_in }}</us>
+		{%- endif %}
+	</m>
+	{%- endfor %}
+</ms>
+</w>
+{%- endfor %}
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block tech %}{% for title, value in technical.items() %}{{ title }} - {{ value }}; {% endfor %}{% endblock %}

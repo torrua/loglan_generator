@@ -1,2 +1,3 @@
-# loglan_generator
-Loglan Dictionary HTML Generator
+# Loglan Dictionary HTML Generator
+
+![GitHub](https://img.shields.io/github/license/torrua/loglan_generator)
