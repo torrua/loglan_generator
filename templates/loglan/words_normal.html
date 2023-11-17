@@ -101,15 +101,7 @@
 		<div class="word_line"><span class="word_name">{{ word.name }}</span>,</div>
 			<div class="meanings">
 				{%- for meaning in word.meanings %}
-				<div class="meaning" id="{{ meaning.mid }}">
-					<div class="technical">{{ meaning.technical }}</div>
-					<div class="definitions">
-					{%- for definition in meaning.definitions %}
-						{{definition}}
-					{%- endfor %}
-					</div>
-					{%- if meaning.used_in %}<div class="used_in">Used In: {{ meaning.used_in }}</div>{%- endif %}
-				</div>
+					{{ meaning }}
 				{%- endfor %}
 			</div>
 		</div>

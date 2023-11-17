@@ -103,17 +103,7 @@
 <w wid="{{ word.name.lower() }}"><wl>{{ word.name }},</wl>
 <ms>
 	{%- for meaning in word.meanings %}
-	<m>
-		<t>{{ meaning.technical }}</t>
-		<ds>
-		{%- for definition in meaning.definitions %}
-			{{definition}}
-		{%- endfor %}
-		</ds>
-		{%- if meaning.used_in %}
-		<us>Used In: {{ meaning.used_in }}</us>
-		{%- endif %}
-	</m>
+		{{ meaning }}
 	{%- endfor %}
 </ms>
 </w>
