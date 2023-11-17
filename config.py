@@ -16,11 +16,12 @@ logging.basicConfig(
 
 log = logging.getLogger(__name__)
 
-EN, RU = "en", "ru"
+EN = "en"
 DEFAULT_LANGUAGE = os.getenv("DEFAULT_LANGUAGE", EN)
 DEFAULT_STYLE = os.getenv("DEFAULT_STYLE", "ultra")
 
 HTML_EXPORT_DIRECTORY_PATH_LOCAL = os.environ.get("HTML_EXPORT_DIRECTORY_PATH_LOCAL", "")
+# TODO Add current directory as Default
 
 if HTML_EXPORT_DIRECTORY_PATH_LOCAL:
     Path(HTML_EXPORT_DIRECTORY_PATH_LOCAL).mkdir(parents=True, exist_ok=True)
