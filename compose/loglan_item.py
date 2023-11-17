@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=C0303
 """
 This module contains a HTMLExportWord Model
 """
@@ -18,7 +17,6 @@ from compose.definition_formatter import DefinitionFormatter
 
 class Meaning(Item):
     def __init__(self, word: Word, style: str = DEFAULT_HTML_STYLE):
-        pass
         self.word = word
         self.style = style
         self._ewc = ExportWordConverter(word)
@@ -257,7 +255,7 @@ class Composer(Item):
 
     def group_iterator(self) -> Iterator[list[Word]]:
         grouped_words = groupby(self.words, lambda ent: ent.name)
-        for name, linked_words in grouped_words:
+        for _, linked_words in grouped_words:
             yield list(linked_words)
 
     def export_as_html(self) -> str:

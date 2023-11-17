@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from loglan_core.definition import BaseDefinition
 from loglan_core.event import BaseEvent
 from loglan_core.word import BaseWord

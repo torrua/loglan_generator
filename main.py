@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=logging-fstring-interpolation
+
 """
 HTML Generator
 """
@@ -40,28 +42,28 @@ def prepare_dictionary_l(
     log.info("Start Loglan dictionary preparation")
     if lex_event is None:
         lex_event = session.execute(Event.latest()).scalar()
-    log.debug("Required Lexical Event is %s", lex_event.name)
+    log.debug(f"Required Lexical Event is {lex_event.name}")
 
     log.debug("Get data from Database")
     select_words = WordSelector().by_event(event_id=lex_event.id)  # [1350:1400]
     all_words = session.execute(select_words).scalars().all()
 
-    log.debug("Grouping total %s words by name", len(all_words))
+    log.debug(f"Grouping total {len(all_words)} words by name")
     grouped_words = groupby(all_words, lambda ent: ent.name)
     log.debug("Making dictionary with grouped words")
     group_words = {k: list(g) for k, g in grouped_words}
 
-    log.debug("Grouping %s word groups by first letter", len(group_words))
+    log.debug(f"Grouping {len(group_words)} word groups by first letter")
     grouped_letters = groupby(group_words, lambda ent: ent[0].upper())
     log.debug("Making dictionary with grouped letters")
     names_grouped_by_letter = {k: list(g) for k, g in grouped_letters}
 
     log.debug(
-        "Making main export dictionary with %s letters" % len(names_grouped_by_letter)
+        f"Making main export dictionary with {len(names_grouped_by_letter)} letters"
     )
     dictionary = {}
     for letter, names in names_grouped_by_letter.items():
-        log.debug("Current letter: %s" % letter)
+        log.debug(f"Current letter: {letter}")
         dictionary[letter] = [
             {
                 "name": group_words[name][0].name,
@@ -72,7 +74,7 @@ def prepare_dictionary_l(
             }
             for name in names
         ]
-    log.info("End Loglan dictionary preparation - %s letters totally", len(dictionary))
+    log.info(f"End Loglan dictionary preparation - {len(dictionary)} letters totally")
     return dictionary
 
 
@@ -100,7 +102,9 @@ def prepare_dictionary_e(
             return True
         return False
 
-    log.info("Start %s dictionary preparation", key_language.capitalize())
+    log.info(
+        f"Start {key_language.capitalize()} dictionary preparation",
+    )
 
     if not lex_event:
         lex_event = session.execute(Event.latest()).scalar()
@@ -111,7 +115,7 @@ def prepare_dictionary_e(
     all_keys = session.execute(select_keys).scalars().all()  # [1600:1700]
     all_keys_words = [key.word for key in all_keys]
 
-    log.debug("Grouping %s keys by word", len(all_keys))
+    log.debug(f"Grouping {len(all_keys)} keys by word")
     grouped_keys = groupby(all_keys, lambda ent: ent.word)
 
     log.debug("Making dictionary with grouped keys")
@@ -134,9 +138,7 @@ def prepare_dictionary_e(
         for letter, names in key_names_grouped_by_letter.items()
     }
     log.info(
-        "End %s dictionary preparation - %s items totally",
-        key_language.capitalize(),
-        len(dictionary),
+        f"End {key_language.capitalize()} dictionary preparation - {len(dictionary)} items totally"
     )
     return dictionary
 
@@ -195,10 +197,15 @@ def generate_dictionary_file(
     name = "L-to-E" if entities_language == "loglan" else "E-to-L"
     timestamp = datetime.now().strftime("%y%m%d%H%M") if not timestamp else timestamp
 
-    file = f"{EXPORT_PATH}{name}-{tech['Database']}-{timestamp}_{lex_event.suffix}_{style[0].lower()}.html"
-    text_file = open(file, "w", encoding="utf-8")
-    text_file.write(render)
-    text_file.close()
+    file = (
+        f"{EXPORT_PATH}{name}-"
+        f"{tech['Database']}-"
+        f"{timestamp}_{lex_event.suffix}_"
+        f"{style[0].lower()}.html"
+    )
+
+    with open(file, "w", encoding="utf-8") as text_file:
+        text_file.write(render)
 
 
 def generate_dictionaries(
