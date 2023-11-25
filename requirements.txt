@@ -1,4 +1,4 @@
 jinja2~=3.1.2
-loglan_core~=0.1.2
+loglan_core~=0.1.3
 sqlalchemy~=2.0.23
 psycopg2~=2.9.9
